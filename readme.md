@@ -10,4 +10,4 @@ Peticiones HTTP, ordenando express mediante clases
 </details>
 
 Para reconstruir los packages utilizar:
-`npm i `
+`npm i`
