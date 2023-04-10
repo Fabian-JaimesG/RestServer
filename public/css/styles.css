@@ -1,0 +1,38 @@
+html,
+body {
+  background-color: rgb(207, 202, 202);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: auto;
+
+}
+
+img,
+.GoHome {
+  flex-direction: row;
+}
+
+img {
+  width: 300px;
+  height: 300px;
+  margin-left: 20px;
+}
+
+.GoHome {
+  border-radius: 50px;
+  border: 3px;
+  border-color: black;
+  background-color: rgb(69, 68, 68);
+  text-align: center;
+}
+
+a{
+    outline: none;
+    text-decoration: none;
+    color: red;
+}
