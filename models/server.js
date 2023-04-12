@@ -27,7 +27,7 @@ class Server {
     //cors
     this.app.use(cors());
 
-    //Lecura y pareo del body
+    //Lecura y parseo del body
     this.app.use(express.json());
 
     //Dir Public

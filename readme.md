@@ -11,6 +11,7 @@ Peticiones HTTP, ordenando express mediante clases
 - [bcryptjs](https://www.npmjs.com/package/bcryptjs) Cifrado optimizado en JavaScript con cero dependencias.
 - [express-validator](https://www.npmjs.com/package/express-validator) Middleware para validador campos como formatos requeridos.
 - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) Genera jsonwebtoken.
+- [google-auth-library](https://www.npmjs.com/package/google-auth-library) Liberira utilizada para autenticar token de google, esta se almacena como dependencia de la  app.
 </details>
 
 Para reconstruir los packages utilizar:
