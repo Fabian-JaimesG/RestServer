@@ -35,7 +35,7 @@ const usuariosPost = async (req = request, res = response) => {
 const usuariosPut = async (req = request, res = response) => {
   const { id } = req.params;
   const { _id, password, google, email, ...resto } = req.body;
-  //Todo validar contra vase de datos
+  //Todo validar contra base de datos
   if (password) {
     //Encriptar la contraseña
     resto.password = encryptPassword(password);
@@ -58,9 +58,10 @@ const usuariosDelete = async(req = request, res = response) => {
 
   //Actualizar el usuario con status a false
   const usuario = await user.findByIdAndUpdate(id,{status:false});
-
-  res.json({
-    usuario
+  const userAuth = req.user;
+  res.json({  
+    usuario,
+    userAuth
   });
 };
 
