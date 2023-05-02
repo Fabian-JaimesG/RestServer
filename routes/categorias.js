@@ -1,4 +1,4 @@
-const { Router, request, response } = require("express");
+const { Router} = require("express");
 const {  validarCampos, validarJWT, adminRole } = require("../middlewares");
 const { check } = require("express-validator");
 const { categoriasPost, categoriasGet, categoriasGetID, categoriasPut, categoriasDelete } = require("../controllers/categorias");

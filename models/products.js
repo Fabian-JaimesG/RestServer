@@ -20,16 +20,21 @@ const ProductsSchema = Schema({
     type:Number,
     default:0 ,
   },
+  category:{
+    type:Schema.Types.ObjectId,
+    ref:'categoria',
+    required:true
+  },
   description:{type:String,},
   available:{type:Boolean,default:true},   
   
 });
 
 ProductsSchema.methods.toJSON = function(){
-  const {__v,_id:uid,...category} = this.toObject();
+  const {__v,_id:uid,...product} = this.toObject();
 
-  category.uid = uid;
-  return category;
+  product.uid = uid;
+  return product;
 }
 
 module.exports = model("Products", ProductsSchema);

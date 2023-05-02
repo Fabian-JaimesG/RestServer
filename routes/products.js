@@ -1,44 +1,46 @@
 const { Router, request, response } = require("express");
 const {  validarCampos, validarJWT, adminRole } = require("../middlewares");
 const { check } = require("express-validator");
-const { categoriasPost, categoriasGet, categoriasGetID, categoriasPut, categoriasDelete } = require("../controllers/categorias");
-const { existCategoriaById, existCategoryName } = require("../helpers/db-validators");
+const { productGet, productPost, productGetID, productPut, productDelete } = require("../controllers/products");
+const { existUserById, existProductByName, existProductById,existCategoriaById } = require("../helpers/db-validators");
 
 const router = Router();
 
+router.get('/',productGet);
 
-//Obtener todas las categorias - publico
-router.get('/',categoriasGet);
-//Obtener todas las categorias por id - publico
 router.get('/:id',[
     check("id", "No es un id valido").isMongoId(),
-    check("id").custom(existCategoriaById),
+    check("id").custom(existProductById), 
     validarCampos
-],categoriasGetID);
-//crear categorias - privado cualquier persona con token valido
-router.post('/',[
-    validarJWT,
-    check("user", "El user no es valido.").isMongoId(),
+],productGetID);
+
+//crear pruductos - privado cualquier persona con token valido
+router.post('/',
+[   validarJWT,
     check("name", "El nombre es obligatorio.").notEmpty(),
-    check("name").custom(existCategoryName),
+    check("name").custom(existProductByName),
+    check("cost", "El precio no es valido.").isDecimal(),
+    check("category", "La categoria tiene que ser un id de mongo valido.").isMongoId(),
+    check("category").custom(existCategoriaById),
     validarCampos,
-],categoriasPost);
+],
+productPost);
 //actualizar categorias - privado cualquier persona con token valido
-router.put('/:id',[
-    validarJWT,
+router.put('/:id',
+[   validarJWT,
     check("id", "No es un id valido").isMongoId(),
-    check("id").custom(existCategoriaById),
-    check("name").custom(existCategoryName),
+    check("id").custom(existProductById),
     validarCampos,
-],categoriasPut);
+],
+productPut);
 //borrar categorias - admin 
 router.delete('/:id',[
     validarJWT,
     adminRole,
     check("id", "No es un id valido").isMongoId(),
-    check("id").custom(existCategoriaById),
+    check("id").custom(existProductById),
     validarCampos,
-],categoriasDelete);
+],productDelete);
 
 
 module.exports = router;

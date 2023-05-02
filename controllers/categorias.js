@@ -1,11 +1,6 @@
 const { request, response, json } = require("express");
 const { modelCategoria } = require("../models");
 
-//Obtener categorias, paginado, total,populate en moongse(en vez del id tener la info del id)
-//Obtner categoria solo una con id
-//actualizar categoria, cambiar nombre y mirar que al que actualizan no exista
-//Borrar categoria - > implica que cambie el status  a false
-
 const categoriasGetID = async (req = request, res = response) => {
   const { id } = req.params;
   const categoria = await modelCategoria.findById(id).populate('user','name');

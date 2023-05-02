@@ -20,6 +20,13 @@ const usuariosGet = async (req = request, res = response) => {
   });
 };
 
+const UsertGetID = async (req = request, res = response) => {
+  const { id } = req.params;
+  const userID = await user.findById(id);
+
+  return res.json(userID);
+};
+
 const usuariosPost = async (req = request, res = response) => {
   const { name, email, password, rol } = req.body;
   const User = new user({ name, email, password, rol });
@@ -71,6 +78,7 @@ const usuariosNoFound = (req = request, res = response) => {
 
 module.exports = {
   usuariosGet,
+  UsertGetID,
   usuariosPost,
   usuariosPut,
   usuariosDelete,

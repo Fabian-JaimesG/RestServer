@@ -1,5 +1,5 @@
 const Rol = require("../models/role");
-const {modeluser:user,modelCategoria} = require("../models");
+const {modeluser:user,modelCategoria, modelProduct} = require("../models");
 
 //Se pone rol en vacio por defecto para que en dado caso de que no se envie del request choque con nuestra validacion
 const validationRol = async (rol = "") => {
@@ -9,23 +9,32 @@ const validationRol = async (rol = "") => {
 };
 
 const validationExistEmail = async (email = "") => {
-  //Verificar si el correo existe
   const existEmail = await user.findOne({ email });
   if (existEmail)
     throw new Error(`El email ${email} ya se encuetra registrado.`);
 };
 
 const existUserById = async (id = "") => {
-  //Verificar si existe el usuario con el id
   const existId = await user.findById(id);
   if (!existId) throw new Error(`El id ${id} no se encuetra registrado.`);
 };
 
 const existCategoriaById = async (id = "") => {
-  //Verificar si existe la categoria con el id
   const existIdC = await modelCategoria.findById(id);
   if (!existIdC) throw new Error(`La categoria ${id} no se encuetra registrado.`);
 };
+
+const existProductById = async (id = "") => {
+  const existIdProduct = await modelProduct .findById(id);
+  if (!existIdProduct) throw new Error(`El producto ${id} no se encuetra registrado.`);
+};
+
+const existProductByName = async (name = "") => {
+  const nameUpper = name.toUpperCase();
+  const ProductDB = await modelProduct.findOne({name:nameUpper});
+  if (ProductDB) throw new Error(`El producto ${ProductDB.name} ya existe.`);
+};
+
 
 const existCategoryName = async (name = "") => {
   const nameUpper = name.toUpperCase();
@@ -38,6 +47,8 @@ module.exports = {
   existUserById,
   validationExistEmail,
   validationRol,
-  existCategoryName 
+  existCategoryName,
+  existProductById,
+  existProductByName
 };
  
