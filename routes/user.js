@@ -5,6 +5,7 @@ const {
   usuariosPut,
   usuariosDelete,
   usuariosNoFound,
+  UsertGetID,
 } = require("../controllers/users");
 const { check } = require("express-validator");
 const { adminRole, validarCampos, validarJWT } = require("../middlewares");
@@ -17,6 +18,11 @@ const {
 const router = Router();
 
 router.get("/", usuariosGet);
+
+router.get('/:id',[
+  check("id", "No es un id valido").isMongoId(),
+  validarCampos
+],UsertGetID);
 
 router.post(
   "/",
