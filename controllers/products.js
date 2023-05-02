@@ -9,7 +9,6 @@ const productPost = async (req = request, res = response) => {
     ...rest,
     user: req.user._id,
   };
-  console.log({data});
   const Product = new modelProduct(data);
   await Product.save();
 

@@ -63,7 +63,6 @@ const SearchProduct = async (parameter = "", res = response) => {
 const searchProductByCategory = async (parameter = "", res = response) => {
   try {
     const isMongoID = ObjectId.isValid(parameter);
-    console.log(isMongoID);
 
     if (isMongoID) {
     const [product, total] = await Promise.all([
@@ -87,7 +86,7 @@ const searchProductByCategory = async (parameter = "", res = response) => {
 
     const [products, total] = await Promise.all([
         modelProduct.find({$or: [...categorys.map((category) => 
-            ({category: category._id,})),],$and: [{ status: true }],})
+            ({category: category._id,})),],$and: [{ status: true }],}) 
             .populate("category", "name"),
         modelProduct.countDocuments({$or: [...categorys.map((category) => ({category: category._id,})),],$and: [{ status: true }],})
       ]);
